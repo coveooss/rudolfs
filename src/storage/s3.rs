@@ -291,6 +291,7 @@ where
             key: self.key_to_path(&key),
             content_length: Some(len as i64),
             body: Some(StreamingBody::new(stream)),
+            acl: Some(String::from("bucket-owner-full-control")),
             ..Default::default()
         };
 
@@ -356,6 +357,7 @@ where
         let request = PutObjectRequest {
             bucket: self.bucket.clone(),
             key: self.key_to_path(&key),
+            acl: Some(String::from("bucket-owner-full-control")),
             ..Default::default()
         };
         let credentials = self.credential_provider.credentials().await.ok()?;
